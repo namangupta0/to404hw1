@@ -36,6 +36,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Data frame basics
+
+We will continue working with the nycflights dataset we looked at in class. **Please be sure to keep the data file in the same directory as the RMD file - your project directory.**
+
+First - make sure that you are reading the data correctly and doing all the data cleaning steps that we did in class. Feel free to go beyond our class work in cleaning the data if you feel the need. 
+
+I now would like you to answer the following - all in their own separate R code blocks.
+
 ```{r}
 # Using read.csv for reading the CSV file
 nyc <- read.csv("nycflights.csv")
@@ -45,15 +53,21 @@ str(nyc)
 head(nyc)
 tail(nyc)
 summary(nyc)
+
+# Delete the column named "X"
+nyc$X <- NULL
+
+# Recode columns as factors as needed
+nyc$carrier <- as.factor(nyc$carrier)
+nyc$flight <- as.factor(nyc$flight)
+nyc$tailnum <- as.factor(nyc$tailnum)
+nyc$origin <- as.factor(nyc$origin)
+nyc$dest <- as.factor(nyc$dest)
+
+# Re-check summary and str
+str(nyc)
+summary(nyc)
 ```
-
-## Data frame basics
-
-We will continue working with the nycflights dataset we looked at in class. **Please be sure to keep the data file in the same directory as the RMD file - your project directory.**
-
-First - make sure that you are reading the data correctly and doing all the data cleaning steps that we did in class. Feel free to go beyond our class work in cleaning the data if you feel the need. 
-
-I now would like you to answer the following - all in their own separate R code blocks.
 
 ### Data Exploration
 
@@ -61,12 +75,32 @@ Let's first do some simple exploration of this data. I would like for you to ans
 
 - How many airlines are there? (Hint: `levels` and `length` can be useful here)
 
+```{r}
+numairlines <- length(levels(nyc$carrier))
+numairlines
+```
+There are `r numairlines` airlines.
+
 - How many flights there were by the airline with code `OO`? (Hint: `nrow` can be useful here along with logical indexing)
+```{r}
+numflightsOO <- nrow(nyc[nyc$carrier == "OO",])
+numflightsOO
+```
+There are `r numflightsOO` flights by the airline code 00.
 
 - How long is the shortest flight out of any NYC airport? (Hint: `min` can be useful, remember to handle `NA` values)
+```{r}
+shortestflight <- min(nyc$air_time, na.rm = TRUE)
+shortestflight
+```
+The shortest flight out of any NYC airport is `r numflightsOO` minutes.
 
 - How many flights where there by United Airlines (code: UA) on Jan 12th 2013?
-
+```{r}
+numflightsUA <- nrow(nyc[nyc$month == 1 & nyc$day == 12 & nyc$carrier == "UA",])
+numflightsUA
+```
+There were `r numflightsUA` by United Airlines on Jan 12th 2013.
 
 ### Arrival Delay
 
@@ -110,11 +144,11 @@ min_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline == min(arr_
 neg_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline <= 0])
 ```
 
-The airline with the highest average arrival delay is: `r max_delay_airline`.
+The airline with the highest average arrival delay is `r max_delay_airline`.
 
-The airline with the smallest average arrival delay is: `r min_delay_airline`.
+The airline with the smallest average arrival delay is `r min_delay_airline`.
 
-The airlines with negative average arrival delays are: `r neg_delay_airline`.
+The airlines with negative average arrival delays are `r neg_delay_airline`.
 
 ### Air Gain
 
