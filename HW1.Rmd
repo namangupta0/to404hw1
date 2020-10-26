@@ -32,6 +32,21 @@ output:
 9. Submit your RMD file, the HTML output and a link to your GitHub Repo on Canvas.
 
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Using read.csv for reading the CSV file
+nyc <- read.csv("nycflights.csv")
+
+# Now we will explore this data
+str(nyc)
+head(nyc)
+tail(nyc)
+summary(nyc)
+```
+
 ## Data frame basics
 
 We will continue working with the nycflights dataset we looked at in class. **Please be sure to keep the data file in the same directory as the RMD file - your project directory.**
@@ -69,6 +84,11 @@ Based on your answers to the two questions above, what can you say about the dis
 Lets see if all airlines are equally terrible as far as flight arrival delays are concerned. For this question you will have to make sure that airline column is coded as a factor.
 
 - Calculate average arrival delays by airline (Hint: look up the command `tapply`)
+# Average Arrival Delay
+```{r}
+# Use function tapply
+
+```
 
 - Draw a Bar Plot of Average Arrival Delays for all the Airlines (Hint: command for making a Bar Plot is simply `barplot`)
 
