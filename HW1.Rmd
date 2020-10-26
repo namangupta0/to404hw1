@@ -84,15 +84,37 @@ Based on your answers to the two questions above, what can you say about the dis
 Lets see if all airlines are equally terrible as far as flight arrival delays are concerned. For this question you will have to make sure that airline column is coded as a factor.
 
 - Calculate average arrival delays by airline (Hint: look up the command `tapply`)
-# Average Arrival Delay
+
 ```{r}
 # Use function tapply
-
+arr_delay_by_airline <- round(tapply(nyc$arr_delay, nyc$carrier, mean, na.rm = TRUE),2)
 ```
+
+
 
 - Draw a Bar Plot of Average Arrival Delays for all the Airlines (Hint: command for making a Bar Plot is simply `barplot`)
 
+```{r}
+barplot(arr_delay_by_airline)
+barplot(sort(arr_delay_by_airline, decreasing = TRUE))
+```
+
+
 - Which airline has the highest average arrival delay? Which airline has the smallest average arrival delay? Are there airlines that actually have negative average delay? Provide answer to this question in a text paragraph form using **inline R code**.
+
+```{r}
+max_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline == max(arr_delay_by_airline)])
+
+min_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline == min(arr_delay_by_airline)])
+
+neg_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline <= 0])
+```
+
+The airline with the highest average arrival delay is: `r max_delay_airline`.
+
+The airline with the smallest average arrival delay is: `r min_delay_airline`.
+
+The airlines with negative average arrival delays are: `r neg_delay_airline`.
 
 ### Air Gain
 
