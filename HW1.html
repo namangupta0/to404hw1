@@ -662,7 +662,7 @@ arr_delay_by_airline</code></pre>
 
 min_delay_airline &lt;- names(arr_delay_by_airline[arr_delay_by_airline == min(arr_delay_by_airline)])
 
-neg_delay_airline &lt;- names(arr_delay_by_airline[arr_delay_by_airline &lt;= 0])</code></pre>
+neg_delay_airline &lt;- names(arr_delay_by_airline[arr_delay_by_airline &lt; 0])</code></pre>
 <p>The airline with the highest average arrival delay is F9.</p>
 <p>The airline with the smallest average arrival delay is AS.</p>
 <p>The airlines with negative average arrival delays are AS, HA.</p>
