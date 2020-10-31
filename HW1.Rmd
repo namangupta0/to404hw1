@@ -140,7 +140,7 @@ max_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline == max(arr_
 
 min_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline == min(arr_delay_by_airline)])
 
-neg_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline <= 0])
+neg_delay_airline <- names(arr_delay_by_airline[arr_delay_by_airline < 0])
 ```
 
 The airline with the highest average arrival delay is `r max_delay_airline`.
